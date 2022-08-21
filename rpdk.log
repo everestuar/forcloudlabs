@@ -1,0 +1,40 @@
+[2022-08-21T23:15:31Z] DEBUG    - Logging set up successfully
+[2022-08-21T23:15:31Z] DEBUG    - Running submit: Namespace(command=<function submit at 0x7f8df465dca0>, dry_run=False, endpoint_url=None, region=None, role_arn=None, set_default=False, subparser_name='submit', use_role=True, verbose=0, version=False)
+[2022-08-21T23:15:31Z] DEBUG    - Root directory: /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs
+[2022-08-21T23:15:31Z] DEBUG    - Loading project file '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config'
+[2022-08-21T23:15:31Z] DEBUG    - Project file /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config not found. Have you run 'init' or in a wrong directory?
+Traceback (most recent call last):
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 562, in load
+    self.load_settings()
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 234, in load_settings
+    with self.settings_path.open("r", encoding="utf-8") as f:
+  File "/usr/lib/python3.8/pathlib.py", line 1222, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/usr/lib/python3.8/pathlib.py", line 1078, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config'
+[2022-08-21T23:15:31Z] DEBUG    - Caught exit recommendation
+Traceback (most recent call last):
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 562, in load
+    self.load_settings()
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 234, in load_settings
+    with self.settings_path.open("r", encoding="utf-8") as f:
+  File "/usr/lib/python3.8/pathlib.py", line 1222, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/usr/lib/python3.8/pathlib.py", line 1078, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/cli.py", line 100, in main
+    args.command(args)
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/submit.py", line 14, in submit
+    project.load()
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 564, in load
+    self._raise_invalid_project(
+  File "/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.venv/lib/python3.8/site-packages/rpdk/core/project.py", line 229, in _raise_invalid_project
+    raise InvalidProjectError(msg) from e
+rpdk.core.exceptions.InvalidProjectError: Project file /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config not found. Have you run 'init' or in a wrong directory?
+[2022-08-21T23:15:31Z] CRITICAL - Project file /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/.rpdk-config not found. Have you run 'init' or in a wrong directory?

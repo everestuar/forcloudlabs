@@ -1,32 +1,37 @@
+
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "A module example wrapping an S3 Bucket. The features are Versioning, Encryption and DeletionPolicy.",
+    "Description": "An IAM Policy that only allows scan access to a specified DynamoDB table",
     "Parameters": {
-        "BucketName": {
-            "Description": "Name for the bucket",
+        "TableArn": {
+            "Description": "ARN of the DynamoDB table to allow access to",
+            "Type": "String"
+        },
+        "NamePrefix": {
+            "Description": "Prefix to attach to the policy name",
             "Type": "String"
         }
     },
     "Resources": {
-        "S3Bucket": {
-            "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Retain",
-            "UpdateReplacePolicy": "Retain",
+        "IAMPolicy": {
+            "Type": "AWS::IAM::ManagedPolicy",
             "Properties": {
-                "BucketName": {
-                    "Ref": "BucketName"
+                "ManagedPolicyName": {
+                    "Fn::Sub" : [ "${Prefix}-DynamoDBScannerPolicy", { "Prefix": {"Ref": "NamePrefix"}}]
                 },
-                "BucketEncryption": {
-                    "ServerSideEncryptionConfiguration": [
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
                         {
-                            "ServerSideEncryptionByDefault": {
-                                "SSEAlgorithm": "AES256"
+                            "Effect": "Allow",
+                            "Action": [
+                                "dynamodb:Scan"
+                            ],
+                            "Resource": {
+                                "Ref": "TableArn"
                             }
                         }
                     ]
-                },
-                "VersioningConfiguration": {
-                    "Status": "Enabled"
                 }
             }
         }

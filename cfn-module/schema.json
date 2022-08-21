@@ -1,0 +1,62 @@
+{
+    "typeName": "MYORG::IAM::DynamoDBScannerPolicyV1::MODULE",
+    "description": "Schema for Module Fragment of type MYORG::IAM::DynamoDBScannerPolicyV1::MODULE",
+    "properties": {
+        "Parameters": {
+            "type": "object",
+            "properties": {
+                "TableArn": {
+                    "type": "object",
+                    "properties": {
+                        "Type": {
+                            "type": "string"
+                        },
+                        "Description": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "Type",
+                        "Description"
+                    ],
+                    "description": "ARN of the DynamoDB table to allow access to"
+                },
+                "NamePrefix": {
+                    "type": "object",
+                    "properties": {
+                        "Type": {
+                            "type": "string"
+                        },
+                        "Description": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "Type",
+                        "Description"
+                    ],
+                    "description": "Prefix to attach to the policy name"
+                }
+            }
+        },
+        "Resources": {
+            "properties": {
+                "IAMPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "Type": {
+                            "type": "string",
+                            "const": "AWS::IAM::ManagedPolicy"
+                        },
+                        "Properties": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": true
+}

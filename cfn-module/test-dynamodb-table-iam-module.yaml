@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Testing IAM Module for a DynamoDB Table'
+Resources:
+  ScannerRole:
+    Type: MYORG::IAM::DynamoDBScannerPolicyV1::MODULE
+    Properties:
+      TableArn: arn:aws:dynamodb:us-east-1:501533612229:table/table1
+      NamePrefix: client
+     
