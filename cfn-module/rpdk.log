@@ -1,0 +1,11 @@
+[2022-08-21T22:50:07Z] DEBUG    - Logging set up successfully
+[2022-08-21T22:50:07Z] DEBUG    - Running None: Namespace(artifact_type=None, command=<function init at 0x7f8cd98a01f0>, endpoint_url=None, force=False, region=None, subparser_name=None, target_schemas=[], type_name=None, verbose=0, version=False)
+[2022-08-21T22:50:07Z] DEBUG    - Root directory: /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module
+[2022-08-21T22:50:07Z] WARNING  - Initializing new project
+[2022-08-21T22:50:07Z] DEBUG    - Loading project file '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.rpdk-config'
+[2022-08-21T22:50:37Z] DEBUG    - Resource type identifier: MYORG::IAM::DynamoDBScannerPolicyV1::MODULE
+[2022-08-21T22:50:37Z] DEBUG    - Overwriting '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/.rpdk-config'
+[2022-08-21T22:50:37Z] DEBUG    - Fragment directory: /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/fragments
+[2022-08-21T22:50:37Z] DEBUG    - Overwriting '/mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module/fragments/sample.json'
+[2022-08-21T22:50:37Z] WARNING  - Initialized a new project in /mnt/c/Users/evere/Documents/Proyectos/forcloudlabs/cfn-module
+[2022-08-21T22:50:37Z] DEBUG    - Finished None
