@@ -19,7 +19,7 @@ Create new module:
 
 Customize fragment
 
-Update the json file created at the beginning, the file can be renamed to whatever fit best.
+* Update the json file created at the beginning, the file can be renamed to whatever fits best.
 
 Deploy module:
 
