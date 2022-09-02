@@ -11,22 +11,31 @@ def lambda_handler(event, context):
 
     input_event = event
 
+    #Determine resource type
+    resource_type = event['detail']['resourceType']
+    print('Resource type: ', resource_type)
+
     #Determine job type based on event - backup completed vs restore completed
     job_type = event['detail-type'].split(' ')[0]
-
-    #Print the job type
     print(job_type + ' job completed')
 
     try:
-        if job_type == 'Backup':
-            handleBackup(input_event)
-        elif job_type == 'Restore':
-            handleRestore(input_event)
+        if resource_type == 'EC2':
+            if job_type == 'Backup':
+                handleEC2Backup(input_event)
+            elif job_type == 'Restore':
+                handleEC2Restore(input_event)
+        elif resource_type == 'RDS':
+            if job_type == 'Backup':
+                print('This is a RDS backup')
+            elif job_type == 'Restore':
+                print('This is a RDS restored')
+
     except Exception as e:
         print(str(e))
         return
 
-def handleBackup(input_event):
+def handleEC2Backup(input_event):
     #Get backup job ID from incoming event
     backup_job_id = input_event['detail']['backupJobId']
     print('Backup job ID: ' + backup_job_id)
@@ -66,7 +75,7 @@ def handleBackup(input_event):
 
     return
 
-def handleRestore(input_event):
+def handleEC2Restore(input_event):
     #Get restore job ID from incoming event
     restore_job_id = input_event['detail']['restoreJobId']
     print('Restore job ID: ' + restore_job_id)
