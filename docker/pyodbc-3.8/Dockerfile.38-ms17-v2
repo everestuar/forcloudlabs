@@ -1,0 +1,38 @@
+FROM lambci/lambda:build-python3.8 as builder
+ENV ODBCINI=/opt/odbc.ini
+ENV ODBCSYSINI=/opt/
+ARG UNIXODBC_VERSION=2.3.9
+RUN yum install -y gzip tar openssl-devel && yum groupinstall "Development Tools" -y
+RUN curl ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-${UNIXODBC_VERSION}.tar.gz -O \
+    && tar xzvf unixODBC-${UNIXODBC_VERSION}.tar.gz \
+    && cd unixODBC-${UNIXODBC_VERSION} \
+    && ./configure --sysconfdir=/opt --disable-gui --disable-drivers --enable-iconv --with-iconv-char-enc=UTF8 --with-iconv-ucode-enc=UTF16LE --prefix=/opt \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf unixODBC-${UNIXODBC_VERSION} unixODBC-${UNIXODBC_VERSION}.tar.gz
+RUN curl https://packages.microsoft.com/config/rhel/6/prod.repo > /etc/yum.repos.d/mssql-release.repo
+RUN yum install e2fsprogs.x86_64 0:1.43.5-2.43.amzn1 fuse-libs.x86_64 0:2.9.4-1.18.amzn1 libss.x86_64 0:1.43.5-2.43.amzn1 -y
+RUN ACCEPT_EULA=Y yum install -y msodbcsql17
+ENV CFLAGS="-I/opt/include"
+ENV LDFLAGS="-L/opt/lib"
+RUN cd /opt && cp -r /opt/microsoft/msodbcsql17/ . && rm -rf /opt/microsoft/
+RUN mkdir /opt/python/ && cd /opt/python/ && pip install pyodbc -t .
+
+RUN echo -e '\
+[ODBC Driver 17 for SQL Server]\n\
+Description=Microsoft ODBC Driver 17 for SQL Server\n\
+Driver=/opt/msodbcsql17/lib64/libmsodbcsql-17.7.so.2.1\n\
+UsageCount=1\
+' > /opt/odbcinst.ini
+
+RUN echo -e '\
+[ODBC Driver 17 for SQL Server]\n\
+Driver = ODBC Driver 17 for SQL Server\n\
+Description = My ODBC Driver 17 for SQL Server\n\
+Trace = No\
+' > /opt/odbc.ini
+
+RUN cd /opt && zip -r9 /opt/pyodbc-layer-38-v2.zip .
+FROM public.ecr.aws/lambda/python:3.8
+COPY --from=builder /opt/pyodbc-layer-38-v2.zip /opt/pyodbc-layer-38-v2.zip
